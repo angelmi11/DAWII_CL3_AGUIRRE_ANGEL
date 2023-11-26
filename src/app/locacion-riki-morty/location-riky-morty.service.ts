@@ -10,8 +10,9 @@ export class LocationRikyMortyService {
   ) { }
 
   public async getLocations() {
-    let resp = await this.http.get('https://rickandmortyapi.com/api/location').toPromise()
-    console.log('resp', resp)
+    let resp: any = await this.http.get('https://rickandmortyapi.com/api/location').toPromise()
+    if (resp?.results.lenght > 0) return "ERROR AL TRAER LOS DATOS"
+    return resp.results.filter((location: any) => location.id % 2 === 0);
   }
 
 }

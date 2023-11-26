@@ -1,1 +1,23 @@
-<p>prestamo works!</p>
+<app-layout></app-layout>
+<div class="container mt-3">
+  <h2>Calculadora de Préstamos</h2>
+
+  <form [formGroup]="prestamoForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="montoPrestamo">Monto del Préstamo:</label>
+      <input type="number" class="form-control" id="montoPrestamo" formControlName="monto" />
+    </div>
+
+    <div *ngIf="prestamoForm?.get?.('monto')?.hasError('required')">
+      Dato requerido
+    </div>
+    
+    <button type="submit" class="btn btn-primary mt-3">Calcular Cuotas</button>
+  </form>
+
+  <div class="mt-3" *ngIf="cuotas > 0">
+    <h4>Detalle del Préstamo</h4>
+    <p>Cantidad de Cuotas: {{ cuotas }}</p>
+    <p>Monto de cada Cuota: {{ montoCuota | currency }}</p>
+  </div>
+</div>
